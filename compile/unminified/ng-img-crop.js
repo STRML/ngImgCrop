@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Alex Kaul
  * License: MIT
  *
- * Generated at Monday, February 23rd, 2015, 3:58:25 PM
+ * Generated at Monday, May 4th, 2015, 12:00:42 PM
  */
 (function() {
 'use strict';
@@ -38,6 +38,11 @@ crop.factory('cropAreaCircle', ['cropArea', function(CropArea) {
   };
 
   CropAreaCircle.prototype = new CropArea();
+
+  // return a type string
+  CropAreaCircle.prototype.getType = function () {
+      return 'circle';
+  };
 
   CropAreaCircle.prototype._calcCirclePerimeterCoords=function(angleDegrees) {
     var hSize=this._size/2;
