@@ -78,6 +78,7 @@ The following code enables to select an image using a file input and crop it. Th
       .controller('Ctrl', function($scope) {
         $scope.myImage='';
         $scope.myCroppedImage='';
+        $scope.areaCoords={};
 
         var handleFileSelect=function(evt) {
           var file=evt.currentTarget.files[0];
@@ -96,10 +97,15 @@ The following code enables to select an image using a file input and crop it. Th
 <body ng-app="app" ng-controller="Ctrl">
   <div>Select an image file: <input type="file" id="fileInput" /></div>
   <div class="cropArea">
-    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+    <img-crop
+      image="myImage"
+      result-image="myCroppedImage"
+      area-coords="areaCoords"
+      >
+    </img-crop>
   </div>
   <div>Cropped Image:</div>
-  <div><img ng-src="{{myCroppedImage}}" /></div>
+  <div><img ng-src="{{myCroppedImage}}" width="{{areaCoords.w}}" height="{{areaCoords.h}}"/></div>
 </body>
 </html>
 ```
@@ -112,6 +118,7 @@ The following code enables to select an image using a file input and crop it. Th
     result-image="{string}"
    [change-on-fly="{boolean}"]
    [area-type="{circle|square}"]
+   [area-coords="{object}"]
    [area-min-size="{number}"]
    [result-image-size="{number}"]
    [result-image-format="{string}"]
@@ -138,6 +145,11 @@ Assignable angular expression to data-bind to. NgImgCrop puts a data uri of a cr
 ### area-type
 
 *Optional*. Type of the crop area. Possible values: circle|square. Default: circle.
+
+### area-coords
+
+*Optional*. Assignable angular expression to data-bind to. NgImgCrop puts an object containing `x`, `y`, `w`, and `h`
+properties in it, which represent the cropped area.
 
 ### area-min-size
 
