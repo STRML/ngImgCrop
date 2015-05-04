@@ -83,19 +83,20 @@ gulp.task('scripts', function () {
             Config.paths.source.js + '/classes/*.js',
             Config.paths.source.js + '/ng-img-crop.js'
     ])
-        .pipe(concat(pkg.name + '.js', {
-            separator: '\n\n',
-            process: function (src) {
-                // Remove all 'use strict'; from the code and
-                // replaces all double blank lines with one
-                return src.replace(/'use strict';\n+/g, '')
-                    .replace(/\n\n\s*\n/g, '\n\n');
-            }
-        }))
-        .pipe(concat.header(Config.banners.unminified + '\n' +
-            '(function() {\n\'use strict\';\n\n'))
-        .pipe(concat.footer('\n}());'))
-        .pipe(gulp.dest(Config.paths.compileUnminified.js));
+    .pipe(concat(pkg.name+'.js', {
+      separator: '\n\n',
+      process: function(src) {
+        // Remove all 'use strict'; from the code and
+        // replaces all double blank lines with one
+        return src.replace(/\r\n/g, '\n')
+                  .replace(/'use strict';\n+/g, '')
+                  .replace(/\n\n\s*\n/g, '\n\n');
+      }
+    }))
+    .pipe(concat.header(Config.banners.unminified + '\n' +
+                        '(function() {\n\'use strict\';\n\n'))
+    .pipe(concat.footer('\n}());'))
+    .pipe(gulp.dest(Config.paths.compileUnminified.js));
 });
 
 
